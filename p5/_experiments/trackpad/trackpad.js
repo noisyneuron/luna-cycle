@@ -17,11 +17,22 @@ let trackpadSamples = [
 ];
 
 let counter = 0;
+let direction = '';
 
 // Uncomment below for p5-friendly code
-// function setup() {
+function setup() {
 //   setInterval("updateSamples()", 100);
-// }
+    // remove this function call from the html (body onload="initTrackpad()")
+    initTrackpad()
+}
+
+function draw() {
+  if(direction === 'forward') {
+    // do something
+  } else if(direction === 'backward') {
+    //do something else 
+  }
+}
 
 // Uncomment below for vanilla javascript-friendly code
 function handleMouseEvent(event) {
@@ -41,13 +52,15 @@ function updateSamples() {
   // Calculate the cross product of the two vectors (B-A) x (C-B)
   let cross = (x1 * y2) - (y1 * x2);
   if (cross > 0) {
-    isSpinningFwd = true;
+    direction = 'forward'
+    isSpinningFwd = true; // where is this declared??
     document.body.innerHTML = "Forward";
     // Uncomment below for vanilla javascript-friendly code
     console.log("isSpinningFwd is " + isSpinningFwd);
     // Uncomment below for p5-friendly code
     // print("isSpinningFwd is " + isSpinningFwd);
   } else if (cross < 0) {
+    direction = 'backward'
     isSpinningBkwd = true;
     document.body.innerHTML = "Backward";
     // Uncomment below for vanilla javascript-friendly code
@@ -55,6 +68,7 @@ function updateSamples() {
     // Uncomment below for p5-friendly code
     // print("isSpinningBkwd is " + isSpinningBkwd);
   } else {
+    direction = '';
     isSpinning = false;
     document.body.innerHTML = "Stopped";
     // Uncomment below for vanilla javascript-friendly code
